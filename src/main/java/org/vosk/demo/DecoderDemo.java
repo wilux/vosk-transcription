@@ -18,19 +18,19 @@ public class DecoderDemo {
     public static void main(String[] argv) throws IOException, UnsupportedAudioFileException {
         LibVosk.setLogLevel(LogLevel.DEBUG);
 
-        try (Model model = new Model("models/vosk-model-small-en-us-0.15");
+        try (Model model = new Model("models/vosk-model-en-us-0.22");
                     InputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream("audio/audio.wav")));
-                    Recognizer recognizer = new Recognizer(model, 16000)) {
+                    Recognizer recognizer = new Recognizer(model, 44100)) {
 
             int nbytes;
             byte[] b = new byte[4096];
-//            while ((nbytes = ais.read(b)) >= 0) {
-//                if (recognizer.acceptWaveForm(b, nbytes)) {
-//                    System.out.println(recognizer.getResult());
-//                } else {
-//                    System.out.println(recognizer.getPartialResult());
-//                }
-//            }
+            while ((nbytes = ais.read(b)) >= 0) {
+                if (recognizer.acceptWaveForm(b, nbytes)) {
+                    System.out.println(recognizer.getResult());
+                } else {
+                    System.out.println(recognizer.getPartialResult());
+                }
+            }
 
             System.out.println(recognizer.getFinalResult());
         }
