@@ -13,4 +13,5 @@ repositories {
 dependencies {
     implementation group: 'net.java.dev.jna', name: 'jna', version: '5.7.0'
     implementation group: 'com.alphacephei', name: 'vosk', version: '0.3.38'
+    implementation group: 'net.bramp.ffmpeg', name: 'ffmpeg', version: '0.7.0'
 }
